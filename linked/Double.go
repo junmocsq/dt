@@ -2,23 +2,23 @@ package linked
 
 import "dt/derror"
 
-type DNode struct {
+type dNode struct {
 	Data interface{}
-	Next *DNode
-	Pre  *DNode
+	Next *dNode
+	Pre  *dNode
 }
 
-type DoubleLinked struct {
-	Head   *DNode
-	Tail   *DNode
+type doubleLinked struct {
+	Head   *dNode
+	Tail   *dNode
 	Length uint32
 }
 
-func DCreate() *DoubleLinked {
-	return &DoubleLinked{Length: 0, Head: nil, Tail: nil}
+func DCreate() *doubleLinked {
+	return &doubleLinked{Length: 0, Head: nil, Tail: nil}
 }
 
-func DIsEmpty(linked *DoubleLinked) bool {
+func DIsEmpty(linked *doubleLinked) bool {
 	if linked.Length == 0 {
 		return true
 	} else {
@@ -26,11 +26,11 @@ func DIsEmpty(linked *DoubleLinked) bool {
 	}
 }
 
-func DFindPrevious(data interface{}, linked *DoubleLinked) {
+func DFindPrevious(data interface{}, linked *doubleLinked) {
 
 }
 
-func DFind(data interface{}, linked *DoubleLinked) (*DNode, error) {
+func DFind(data interface{}, linked *doubleLinked) (*dNode, error) {
 	if DIsEmpty(linked) {
 		return nil, derror.NewErr(4000)
 	}
@@ -47,8 +47,8 @@ func DFind(data interface{}, linked *DoubleLinked) (*DNode, error) {
 	return nil, derror.NewErr(4001)
 }
 
-func DInsert(data interface{}, linked *DoubleLinked) bool {
-	temp := DNode{Data: data}
+func DInsert(data interface{}, linked *doubleLinked) bool {
+	temp := dNode{Data: data}
 	if DIsEmpty(linked) {
 		linked.Length++
 		linked.Head = &temp

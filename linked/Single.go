@@ -5,23 +5,23 @@ import (
 	"fmt"
 )
 
-type Node struct {
+type node struct {
 	Data interface{}
-	Next *Node
+	Next *node
 }
 
-type SingleLinked struct {
+type singleLinked struct {
 	Length uint32
-	Head   *Node
-	Tail   *Node
+	Head   *node
+	Tail   *node
 }
 
-func SCreate() *SingleLinked {
-	head := SingleLinked{Length: 0, Head: nil, Tail: nil}
+func SCreate() *singleLinked {
+	head := singleLinked{Length: 0, Head: nil, Tail: nil}
 	return &head
 }
 
-func SIsEmpty(linked *SingleLinked) bool {
+func SIsEmpty(linked *singleLinked) bool {
 	if linked.Length == 0 {
 		return true
 	} else {
@@ -29,7 +29,7 @@ func SIsEmpty(linked *SingleLinked) bool {
 	}
 }
 
-func SIsLast(node *Node, linked *SingleLinked) bool {
+func SIsLast(node *node, linked *singleLinked) bool {
 	if linked.Tail == node {
 		return true
 	} else {
@@ -37,36 +37,36 @@ func SIsLast(node *Node, linked *SingleLinked) bool {
 	}
 }
 
-func GetLength(linked *SingleLinked) uint32 {
+func GetLength(linked *singleLinked) uint32 {
 	return linked.Length
 }
 
 /**
 	查找指定数据的上一个节点
  */
-func SFindPrevious(data interface{}, linked *SingleLinked) (*Node, error) {
+func SFindPrevious(data interface{}, linked *singleLinked) (*node, error) {
 
 	if linked.Length == 0 {
-		return &Node{}, derror.NewErr(4000)
+		return &node{}, derror.NewErr(4000)
 	}
 	temp := linked.Head
 	if temp.Next == nil {
-		return &Node{}, derror.NewErr(4001)
+		return &node{}, derror.NewErr(4001)
 	}
 	for {
 		if temp.Next.Data == data {
 			return temp, nil
 		}
 		if temp.Next.Next == nil {
-			return &Node{}, derror.NewErr(4001)
+			return &node{}, derror.NewErr(4001)
 		}
 		temp = temp.Next
 	}
 }
 
-func SFind(data interface{}, linked *SingleLinked) (*Node, error) {
+func SFind(data interface{}, linked *singleLinked) (*node, error) {
 	if linked.Length == 0 {
-		return &Node{}, derror.NewErr(4000)
+		return &node{}, derror.NewErr(4000)
 	}
 	temp := linked.Head
 	for {
@@ -74,7 +74,7 @@ func SFind(data interface{}, linked *SingleLinked) (*Node, error) {
 			return temp, nil
 		}
 		if temp.Next == nil {
-			return &Node{}, derror.NewErr(4001)
+			return &node{}, derror.NewErr(4001)
 		}
 		temp = temp.Next
 	}
@@ -83,8 +83,8 @@ func SFind(data interface{}, linked *SingleLinked) (*Node, error) {
 /**
 插入队尾 不支持数据重复
  */
-func SInsert(data interface{}, linked *SingleLinked) bool {
-	node := Node{Data: data, Next: nil}
+func SInsert(data interface{}, linked *singleLinked) bool {
+	node := node{Data: data, Next: nil}
 	if linked.Length == 0 {
 		linked.Head = &node
 		linked.Tail = &node
@@ -108,7 +108,7 @@ func SInsert(data interface{}, linked *SingleLinked) bool {
 	return true
 }
 
-func SDelete(data interface{}, linked *SingleLinked) (error) {
+func SDelete(data interface{}, linked *singleLinked) (error) {
 	if linked.Length == 0 {
 		return derror.NewErr(4000)
 	}
@@ -133,7 +133,7 @@ func SDelete(data interface{}, linked *SingleLinked) (error) {
 	return nil
 }
 
-func SDeleteList(linked *SingleLinked) {
+func SDeleteList(linked *singleLinked) {
 	p := linked.Head
 	linked = nil
 	for p.Next != nil {
@@ -143,7 +143,7 @@ func SDeleteList(linked *SingleLinked) {
 	}
 }
 
-func SPrint(linked *SingleLinked) {
+func SPrint(linked *singleLinked) {
 	temp := linked.Head
 	index := 0
 	for temp != nil {
