@@ -1,19 +1,32 @@
 package main
 
 import (
-	 "dt/linked"
+	"dt/linked"
 )
 
-func main()  {
-	link := linked.SCreate()
-	linked.SInsert(5,link)
-	linked.SInsert(1,link)
-	linked.SInsert(2,link)
-	linked.SInsert(3,link)
-	linked.SInsert(4,link)
-	linked.SInsert(4,link)
-	linked.SInsert(4,link)
-	linked.SInsert(4,link)
-	linked.SPrint(link)
+func main() {
+	vec := linked.VCreate(2)
 
+	vec.VAdd(10, 10)
+	vec.VAdd(10, 9)
+	vec.VAdd(10, 8)
+	vec.VAdd(10, 7)
+	vec.VAdd(10, 6)
+	vec.VAdd(3, 20)
+	vec.VAdd(10, 10)
+	vec.VAdd(10, 9)
+	vec.VAdd(10, 8)
+	vec.VAdd(10, 7)
+	vec.VAdd(10, 6)
+	vec.VAdd(3, 20)
+	vec.VAdd(10, 10)
+	vec.VAdd(10, 9)
+	vec.VAdd(10, 8)
+	vec.VAdd(10, 7)
+	vec.VAdd(10, 6)
+	vec.VAdd(3, 20)
+
+	vec.VPrint()
+	vec.VDeduplicate()
+	vec.VPrint()
 }

@@ -60,5 +60,6 @@ func DInsert(data interface{}, linked *doubleLinked) bool {
 	pre.Next = &temp
 	linked.Tail.Pre = pre
 	linked.Length ++
+	return true
 }
 
