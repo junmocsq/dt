@@ -6,23 +6,22 @@ import (
 	"time"
 )
 
+func a2() {
+	aa := []string{"csq1", "csq2", "csq3", "csq4", "csq5", "csq6", "csq7", "csq8", "csq9"}
 
-func a2(){
-	aa :=[]string{"csq1","csq2","csq3","csq4","csq5","csq6","csq7","csq8","csq9"}
-
-	t :=time.Now().UnixNano()
-	for i:=0; i<1000000;i++  {
-		strings.Join(aa,"-")
+	t := time.Now().UnixNano()
+	for i := 0; i < 1000000; i++ {
+		strings.Join(aa, "-")
 	}
-	fmt.Println(time.Now().UnixNano()-t)
-	t =time.Now().UnixNano()
-	for i:=0; i<1000000;i++  {
-		s:=""
-		for _,k := range aa{
-			s += k+","
+	fmt.Println(time.Now().UnixNano() - t)
+	t = time.Now().UnixNano()
+	for i := 0; i < 1000000; i++ {
+		s := ""
+		for _, k := range aa {
+			s += k + ","
 		}
 	}
-	fmt.Println(time.Now().UnixNano()-t)
+	fmt.Println(time.Now().UnixNano() - t)
 
 }
 
