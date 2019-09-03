@@ -25,7 +25,7 @@ type ArrLinearList struct {
 }
 
 func NewArr(length int) *ArrLinearList {
-	temp := make([]int,length)
+	temp := make([]int, length)
 	return &ArrLinearList{array: temp, length: 0, cap: length}
 }
 
@@ -132,4 +132,54 @@ func (this *ArrLinearList) Output() {
 		fmt.Printf("%d \t", this.array[i])
 	}
 	fmt.Printf("\n")
+}
+
+// 反转
+func (this *ArrLinearList) Reverse() {
+	mid := this.length / 2
+	for i := 0; i < mid; i++ {
+		this.array[i], this.array[this.length-i-1] = this.array[this.length-i-1], this.array[i]
+	}
+}
+
+// 左移num个
+func (this *ArrLinearList) LeftShift(num int) bool {
+	if num > this.length {
+		return false
+	}
+	this.length -= num
+	this.shrink()
+	return true
+
+}
+
+// 循环向左移动
+func (this *ArrLinearList) CircularShift(num int) bool {
+	if num < 0 {
+		return false
+	}
+	if num == 0 || this.length <= 1 || num%this.length == 0 {
+		return true
+	}
+	num %= this.length
+	fmt.Println(num, this.array)
+	if this.length > num {
+		// 先把num内的缓存起来
+		tempArr := make([]int, num)
+		for i := 0; i < num; i++ {
+			tempArr[i] = this.array[i]
+		}
+		// 一次移动num步 移动num组
+		for i := 0; i < num; i++ {
+			for j := i + num; j < this.length; j += num {
+				this.array[j-num] = this.array[j]
+			}
+		}
+		// 把临时值取出
+		for i := 0; i < num; i++ {
+			this.array[this.length+i-num] = tempArr[i]
+		}
+	}
+	return true
+
 }
