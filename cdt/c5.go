@@ -11,7 +11,7 @@ type LinearList interface {
 	Size() int
 	Get(int) (int, error)
 	IndexOf(int) int
-	Erase(index int) (int, bool)
+	Erase(index int) (int, error)
 	Insert(index int, val int) bool
 	Output()
 }
@@ -127,7 +127,7 @@ func (this *ArrLinearList) Insert(index int, val int) bool {
 }
 
 func (this *ArrLinearList) Output() {
-	fmt.Println("length:", this.length, " cap:", this.cap)
+	fmt.Println("ArrLinearList length:", this.length, " cap:", this.cap)
 	for i := 0; i < this.length; i++ {
 		fmt.Printf("%d \t", this.array[i])
 	}
