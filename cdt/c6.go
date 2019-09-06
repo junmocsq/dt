@@ -12,6 +12,7 @@ type ChainNode struct {
 
 type Chain struct {
 	head *ChainNode
+	tail *ChainNode
 	size int
 }
 
@@ -73,6 +74,9 @@ func (this *Chain) Erase(index int) (int, error) {
 	if index == 0 {
 		val = this.head.ele
 		this.head = this.head.next
+		if this.head == nil {
+			this.tail = nil
+		}
 	} else {
 		temp := this.head
 		for i := 0; i < index-1; i++ {
@@ -80,6 +84,9 @@ func (this *Chain) Erase(index int) (int, error) {
 		}
 		val = temp.next.ele
 		temp.next = temp.next.next
+		if temp.next == nil {
+			this.tail = temp
+		}
 	}
 	this.size--
 	return val, nil
@@ -102,8 +109,23 @@ func (this *Chain) Insert(index int, val int) bool {
 		node.next = temp.next
 		temp.next = &node
 	}
+	if node.next == nil {
+		this.tail = &node
+	}
 	this.size++
 	return true
+}
+
+func (this *Chain) PushBack(val int) {
+	node := ChainNode{ele: val, next: nil}
+	if this.head == nil {
+		this.head = &node
+		this.tail = &node
+	} else {
+		this.tail.next = &node
+		this.tail = &node
+	}
+	this.size++
 }
 
 func (this *Chain) Output() {
@@ -116,4 +138,44 @@ func (this *Chain) Output() {
 		}
 	}
 	fmt.Printf("\n")
+}
+
+func (this *Chain) Reverse() {
+	if this.size <= 2 {
+		if this.size == 2 {
+			this.tail.next = this.head
+			this.head.next = nil
+		}
+	} else {
+		pre := this.head
+		mid := pre.next
+		pre.next = nil
+		for {
+			last := mid.next
+			mid.next = pre
+			if last.next == nil {
+				last.next = mid
+				break
+			}
+			pre = mid
+			mid = last
+		}
+	}
+	this.head, this.tail = this.tail, this.head
+}
+
+func (this *Chain) LeftShift(num int) {
+	if num >= this.size {
+		this.size = 0
+		this.head = nil
+		this.tail = nil
+	} else {
+		temp := this.head
+		for i := 0; i < num; i++ {
+			temp = temp.next
+		}
+		this.head = temp
+		this.size -= num
+	}
+
 }
