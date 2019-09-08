@@ -3,24 +3,22 @@ package alg
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 func TestTHeapSort_MaxHeapify(t *testing.T) {
 	h := &THeapSort{length: 0, size: 0, array: []int{}}
-	arr := make([]int, 20)
-	for i := 0; i < 20; i++ {
-		arr[i] = i + 1
+	ti := time.Now().UnixNano()
+	for i := 0; i < 10; i++ {
+		temp := i + 1
+		h.MaxHeapInsert(temp)
 	}
-	arr = []int{5, 3, 17, 10, 84, 19, 6, 22, 9}
-	h.BuildMaxHeap(arr)
-	h.Output()
-	fmt.Println(h.MaxHeapSort())
-	h.BuildMinHeap(arr)
-	h.Output()
-	fmt.Println(h.MinHeapSort())
-	h.array = []int{5, 13, 2, 25, 7, 17, 20, 8, 4}
-	h.size = 9
-	h.length = 20
-	fmt.Println(h.MaxHeapSort())
+	ti2 := time.Now().UnixNano()
+	fmt.Println((ti2 - ti) / 1000000.0)
 
+	ti3 := time.Now().UnixNano()
+	fmt.Println((ti3 - ti2) / 1000000.0)
+	h.Output()
+	h.HeapIncreaseKey(0, 2)
+	h.Output()
 }

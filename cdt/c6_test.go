@@ -1,6 +1,11 @@
 package cdt
 
-import "testing"
+import (
+	"math/rand"
+	"strconv"
+	"testing"
+	"time"
+)
 
 func TestChain_Output(t *testing.T) {
 	chain := &Chain{size: 0, head: nil}
@@ -50,4 +55,14 @@ func TestDoublyLinkedList_Output(t *testing.T) {
 	l.Output()
 	double.Erase(5)
 	double.Output()
+
+	testbox := &NewBox{}
+	for i := 0; i < 1000; i++ {
+		rand.Seed(int64(i))
+		score := rand.Int() % 101
+		testbox.Insert(0, score, "junmo-"+strconv.Itoa(time.Now().Nanosecond()))
+	}
+	testbox.Output()
+	testbox.Box(100)
+	testbox.Output()
 }
