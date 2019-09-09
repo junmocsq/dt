@@ -1,6 +1,7 @@
 package cdt
 
 import (
+	"fmt"
 	"math/rand"
 	"strconv"
 	"testing"
@@ -57,12 +58,28 @@ func TestDoublyLinkedList_Output(t *testing.T) {
 	double.Output()
 
 	testbox := &NewBox{}
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 1e3; i++ {
 		rand.Seed(int64(i))
-		score := rand.Int() % 101
+		score := rand.Int() % 1000
 		testbox.Insert(0, score, "junmo-"+strconv.Itoa(time.Now().Nanosecond()))
 	}
-	testbox.Output()
-	testbox.Box(100)
-	testbox.Output()
+	t1 := time.Now().UnixNano()
+	testbox.binSort(999, 1)
+	t2 := time.Now().UnixNano()
+	fmt.Println(t2 - t1)
+	testbox2 := &NewBox{}
+	for i := 0; i < 1e3; i++ {
+		rand.Seed(int64(i))
+		score := rand.Int() % 1000
+		testbox2.Insert(0, score, "junmo-"+strconv.Itoa(time.Now().Nanosecond()))
+	}
+	t3 := time.Now().UnixNano()
+	testbox2.Box(999)
+	t4 := time.Now().UnixNano()
+	fmt.Println(t4 - t3)
+
+	a := &hull{}
+	b := &hull{x: -1.732, y: -1}
+	fmt.Println(polar(a, b))
+
 }

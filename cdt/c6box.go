@@ -1,8 +1,10 @@
 package cdt
 
+// 箱子排序 基数排序
 import (
 	"errors"
 	"fmt"
+	"math"
 )
 
 // 箱子排序
@@ -137,6 +139,18 @@ func boxinsert(b []*box, i int, record *studentRecord) {
 	}
 }
 
+func boxinsertrev(b []*box, i int, record *studentRecord) {
+	record.next = nil
+
+	temp := b[i]
+	if temp == nil {
+		b[i] = &box{studentNext: record}
+	} else {
+		record.next = temp.studentNext
+		b[i].studentNext = record
+	}
+}
+
 // 箱子排序
 func (this *NewBox) Box(totalScore int) {
 	box := newBox(totalScore + 1)
@@ -168,10 +182,64 @@ func (this *NewBox) Box(totalScore int) {
 
 }
 
-func (this *NewBox) binSort(maxNum int) {
-	//tempNum := 10
-	//maxNum*=10
-	//for ;maxNum>0;maxNum = maxNum/10 {
-	//
-	//}
+// 基数排序 flag 0 降序 1 升序
+func (this *NewBox) binSort(maxNum int, flag int) {
+	// 获取排序数据的10进制位数
+	digit := 1
+	for {
+		maxNum /= 10
+		if maxNum > 0 {
+			digit++
+		} else {
+			break
+		}
+	}
+
+	for index := 1; index <= digit; index++ {
+		// 分位数进行箱子排序
+		box := newBox(10)
+		size := this.size
+		for i := 0; i < size; i++ {
+			record, err := this.Erase(0)
+			if err != nil {
+				fmt.Println(err)
+			}
+			//fmt.Println(record,i,this.size)
+			if flag == 1 {
+				boxinsert(box, getigit(record.score, index), record)
+			} else {
+				boxinsertrev(box, getigit(record.score, index), record)
+			}
+		}
+
+		this.head = nil
+		this.size = 0
+
+		for i := 0; i < 10; i++ {
+			if box[i] != nil {
+				trecord := box[i].studentNext
+				for {
+					if flag == 1 {
+						this.Insert(this.size, trecord.score, trecord.name)
+					} else {
+						this.Insert(0, trecord.score, trecord.name)
+					}
+
+					if trecord.next == nil {
+						break
+					}
+					trecord = trecord.next
+				}
+			}
+		}
+	}
+}
+
+func getigit(num int, digit int) int {
+	if digit == 1 {
+		return num % 10
+	} else {
+		temp := int(math.Pow10(digit - 1))
+		return num / temp % 10
+	}
 }
