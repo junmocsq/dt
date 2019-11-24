@@ -68,11 +68,11 @@ func (arr *array) IsFull() bool {
 	}
 }
 
-func (arr *array) Add(val interface{}) (uint32,bool) {
+func (arr *array) Add(val interface{}) (uint32, bool) {
 	if arr.IsFull() {
-		return 0,false
+		return 0, false
 	}
 	arr.Arr[arr.Size] = val
 	arr.Size++
-	return arr.Size - 1,true
+	return arr.Size - 1, true
 }

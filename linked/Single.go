@@ -42,8 +42,8 @@ func GetLength(linked *singleLinked) uint32 {
 }
 
 /**
-	查找指定数据的上一个节点
- */
+查找指定数据的上一个节点
+*/
 func SFindPrevious(data interface{}, linked *singleLinked) (*node, error) {
 
 	if linked.Length == 0 {
@@ -82,13 +82,13 @@ func SFind(data interface{}, linked *singleLinked) (*node, error) {
 
 /**
 插入队尾 不支持数据重复
- */
+*/
 func SInsert(data interface{}, linked *singleLinked) bool {
 	node := node{Data: data, Next: nil}
 	if linked.Length == 0 {
 		linked.Head = &node
 		linked.Tail = &node
-		linked.Length ++
+		linked.Length++
 		return true
 	}
 	temp := linked.Head
@@ -104,11 +104,11 @@ func SInsert(data interface{}, linked *singleLinked) bool {
 	}
 	temp.Next = &node
 	linked.Tail = &node
-	linked.Length ++
+	linked.Length++
 	return true
 }
 
-func SDelete(data interface{}, linked *singleLinked) (error) {
+func SDelete(data interface{}, linked *singleLinked) error {
 	if linked.Length == 0 {
 		return derror.NewErr(4000)
 	}
@@ -129,7 +129,7 @@ func SDelete(data interface{}, linked *singleLinked) (error) {
 		linked.Tail = pre
 	}
 	pre.Next = next
-	linked.Length --
+	linked.Length--
 	return nil
 }
 
