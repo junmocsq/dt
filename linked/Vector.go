@@ -2,8 +2,8 @@ package linked
 
 import (
 	"dt/derror"
-	"math/rand"
 	"fmt"
+	"math/rand"
 )
 
 const (
@@ -49,7 +49,7 @@ func (vec *vector) VEmpty() bool {
 // 判断向量是否已排序 返回逆序对
 func (vec *vector) VDisordered(sort int) int {
 	var i int
-	var count  = 0
+	var count = 0
 	for i = 1; i < vec.size; i++ {
 		if sort == ASC {
 			if vec.arr[i-1] > vec.arr[i] {

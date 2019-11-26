@@ -1,10 +1,10 @@
 package derror
 
 import (
-	"errors"
-	"os"
-	"io/ioutil"
 	"encoding/json"
+	"errors"
+	"io/ioutil"
+	"os"
 )
 
 func NewErr(code int) error {
