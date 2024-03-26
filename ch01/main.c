@@ -8,10 +8,12 @@ int main()
 {
     int list[N];
     // 选择排序
+    void (*sort)(int [], int);
+    
     sort = selection_sort;
     generate_arr_int(list, N);
     arr_printf_int(list, N);
-    sort(list, N);
+    selection_sort(list, N);
     printf("排序后\n");
     arr_printf_int(list, N);
 
